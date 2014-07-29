@@ -1,0 +1,55 @@
+<!doctype html>
+<html ng-app="pledgedSitesApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Subscribe to Web</title>
+    </head>
+    <body ng-cloak>
+        <div class="container dash-container" ng-controller="dashboardCtrl">
+          <p>Total Visitis past month: {{usage.total}}</p>
+          <p>Monthly visits per domain:
+            <button ng-click="toggelChart()" id="chartButton">Hide</button>
+          </p>
+          <div class="visitChart" id="visitChart" ng-show="showChart"></div>
+          <div class="sitesDiv">
+            <table class="">
+             <tr ng-repeat="item in sites">
+               <td class="dashTd">
+                <a href="http://{{item[0]}}">{{item[0]}}</a>
+               </td>
+               <td class="dashTd">
+                {{item[1]}} visits
+               </td>
+               <td class="controlTd">
+                 <span ng_show="item[2] == null">
+                   <button class="" ng-click="passon('nominate', item[0])">Nominate</button>
+                 </span>
+                 <span ng_show="!item[2].canPledge && item[2].nominated">
+                  Nominated
+                 </span>
+                 <span ng_show="item[2].canPledge && !item[2].pledged">
+                   <button class="" ng-click="passon('pledged', item[0])">Pledge</button>
+                 </span>
+                 <span ng_show="item[2].canPledge && item[2].pledged">
+                   <span ng_show="!item[2].unblocked">
+                     <button class="" ng-click="passon('unblock', item[0])">Show Ads</button>
+                   </span>
+                   <span ng_show="item[2].unblocked">
+                     <button class="" ng-click="passon('reblock', item[0])">Block Ads</button>
+                   </span>
+                   <span ng_show="!item[2].unpledged">
+                     <button class="" ng-click="passon('unpledge', item[0])">Revoke Pledge</button>
+                     affective 1st of Next Month
+                   </span>
+                   <span ng_show="item[2].unpledged">
+                     <button class="" ng-click="passon('repledge', item[0])">Remove Pledge Revokation</button>
+                   </span>
+                 </span>
+                 </span>
+               </td>
+             </tr>
+            </table>
+          </div>
+        </div>
+    </body>
+</html>
