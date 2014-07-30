@@ -47,35 +47,37 @@ pledgedSitesApp.controller("pledgedSitesCtrl", function($scope) {
 pledgedSitesApp.controller("pledgedSitesCtrlDebug", function($scope) {
   $scope.pledgedSites = null;
 
-  $scope.pledge = function pledge(site) {
-    self.port.emit("pledged", site);
+
+  $scope.addParticipatingSite = function monthlyPledge() {
   }
 
-  $scope.clear = function clear(site) {
-    self.port.emit("cleared", site);
+  $scope.addSite = function() {
+    self.port.emit("participate", $scope.newsite);
   }
 
-  $scope.monthlyPledge = function monthlyPledge() {
-    self.port.emit("monthly-amount", $scope.monthlyPledgeAmount);
+  $scope.clearSite = function(site) {
+    self.port.emit("clearsite", site || $scope.newsite);
+  }
+
+  $scope.deleteSite = function(site) {
+    self.port.emit("deletesite", site || $scope.newsite);
+  }
+
+  $scope.clearAll = function() {
+    self.port.emit("clearall", $scope.newsite);
   }
 
   self.port.on("pledgedSites", function(pledgeData) {
     $scope.$apply(_ => {
       $scope.pledgedSites = pledgeData.sites;
-      $scope.pledgedSitesKeys = Object.keys(pledgeData.sites);
+      $scope.pledgedSitesKeys = Object.keys(pledgeData.sites).reverse();
       $scope.monthlyPledgeAmount = pledgeData.amount;
-      $scope.pledgedSitesKeys.forEach((host) => {
-        let siteInfo = pledgeData.sites[host];
-        siteInfo.dollars = Math.round(pledgeData.amount * siteInfo.percentage) / 100 || 0;
-      });
-      $scope.pledgedSitesStr = JSON.stringify($scope.pledgedSites);
     });
   });
 });
 
 pledgedSitesApp.controller("pledgePanelCtr", function($scope) {
   $scope.passon = function passon(token) {
-    dump(token + " " + $scope.siteInfo.host + " <<<<\n");
     self.port.emit("command", {token: token, site: $scope.siteInfo.host});
   }
 

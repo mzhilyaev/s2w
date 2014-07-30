@@ -10,14 +10,14 @@
           <div>
              <button class="btn btn-default" ng-click="clearAll()">Clear All Sites</button>
           </div>
-          <!--
-            <form ng-submit="monthlyPledge()">
-              Your monthly total pledge
-              <input type="number"
-                     size="20"
-                     ng-model="monthlyPledgeAmount"/>
+            <form>
+              Enter participating site
+              <input type="text"
+                     size="30"
+                     ng-model="newsite"/>
+              <button class="btn btn-default" ng-click="addSite()">Add</button>
+              <button class="btn btn-default" ng-click="clearSite()">Clear</button>
             </form>
-            -->
             <!-- <pre ng-show="pledgedSites">{{pledgedSitesStr}}</pre> -->
             <table class="table table-condensed" ng-show="pledgedSites">
                <tr ng-repeat="site in pledgedSitesKeys">
@@ -36,10 +36,10 @@
                    offered {{pledgedSites[site].offered}} times
                  </td>
                  <td>
-                   cancelled for later {{pledgedSites[site].pledgeLater}} times
+                   pledge later {{pledgedSites[site].pledgeLater}}
                  </td>
                  <td>
-                   <span ng-show="pledgedSites[site].cancelledForever"> cancelled for ever </span>
+                   <span ng-show="pledgedSites[site].cancelledForever"> cancelled </span>
                  </td>
                  <td>
                    <span ng-show="pledgedSites[site].unblocked"> unblocked on</span>
@@ -49,10 +49,13 @@
                    <span ng-show="pledgedSites[site].unpledged"> unpledged on </span>
                    <span ng-show="!pledgedSites[site].unpledged"> unpledged off </span>
                  </td>
-                 <!--
                  <td>
-                   <button class="btn btn-default" ng-click="pledge(site)">Pledge More</button>
+                   <button class="" ng-click="clearSite(site)">Clear</button>
                  </td>
+                 <td>
+                   <button class="" ng-click="deleteSite(site)">Delete</button>
+                 </td>
+                 <!--
                  <td>
                    <button class="btn btn-default" ng-click="clear(site)">Clear All</button>
                  </td>
