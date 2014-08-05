@@ -6,7 +6,9 @@
     </head>
     <body ng-cloak>
         <div class="container dash-container" ng-controller="dashboardCtrl">
-          <p>Total Visitis past month: {{usage.total}}</p>
+          <p>Welcome to Subscribe to Web dashboard!
+            <button ng-click="passon('uninstall')">Uninstall</button>
+          </p>
           <p>Monthly visits per domain:
             <button ng-click="toggelChart()" id="chartButton">Hide</button>
           </p>
