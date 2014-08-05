@@ -9,9 +9,6 @@
           <p>Welcome to Subscribe to Web dashboard!
             <button ng-click="passon('uninstall')">Uninstall</button>
           </p>
-          <p>Monthly visits per domain:
-            <button ng-click="toggelChart()" id="chartButton">Hide</button>
-          </p>
           <div class="visitChart" id="visitChart" ng-show="showChart"></div>
           <div class="sitesDiv">
             <table class="">
@@ -52,6 +49,21 @@
              </tr>
             </table>
           </div>
+          <div class="nominatedDiv">
+            <a href ng-show="nominated.length > 0" ng-click="toggleNominatedList()">Nominated Sites</a>
+            <div ng-show="showNominated">
+              <table class="">
+               <tr ng-repeat="item in nominated">
+                 <td class="dashTd">
+                  <a href="http://{{item[0]}}">{{item[0]}}</a>
+                 </td>
+                 <td class="dashTd">
+                  {{item[1]}} visits
+                 </td>
+               </tr>
+              </table>
+            </div>
+           </div>
         </div>
     </body>
 </html>
