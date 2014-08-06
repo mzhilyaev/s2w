@@ -2,7 +2,7 @@
 <html ng-app="pledgedSitesApp">
     <head>
         <meta charset="utf-8">
-        <title>Subscribe to Web</title>
+        <title>Subscribe to Web: Dashboard</title>
     </head>
     <body ng-cloak>
         <div class="container dash-container" ng-controller="dashboardCtrl">
@@ -14,7 +14,7 @@
             <table class="">
              <tr ng-repeat="item in sites">
                <td class="dashTd">
-                <a href="http://{{item[0]}}">{{item[0]}}</a>
+                <a id="{{'anchor_' + item[0]}}"></a><a href="http://{{item[0]}}">{{item[0]}}</a>
                </td>
                <td class="dashTd">
                 {{item[1]}} visits
