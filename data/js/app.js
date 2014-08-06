@@ -183,6 +183,47 @@ pledgedSitesApp.controller("dashboardCtrl", function($scope) {
   });
 });
 
+
+pledgedSitesApp.controller("magstoreCtrl", function($scope) {
+
+  $scope.passon = function(token, site) {
+    self.port.emit("command", {token: token, site: site});
+  }
+
+  $scope.configure = function(site) {
+    self.port.emit("configure", site);
+  }
+
+  self.port.on("data", function(data) {
+    let {usage, pledges} = data;
+    let domains = usage.domains;
+    let sorted = [];
+    let visited = {};
+
+    // populate sorted with visited participating sites first
+    Object.keys(domains).sort(function(a, b) {
+      return domains[b] - domains[a];
+    }).forEach(domain => {
+      // only collect sites that are pledged
+      if (pledges.sites[domain] && pledges.sites[domain].canPledge) {
+        sorted.push([domain, domains[domain], pledges.sites[domain]]);
+        visited[domain] = true;
+      }
+    });
+
+    // add participating sites that were not visited
+    Object.keys(pledges.sites).forEach(domain => {
+      if (!visited[domain] && pledges.sites[domain].canPledge) {
+        sorted.push([domain, 0, pledges.sites[domain]]);
+      }
+    });
+
+    $scope.$apply(_ => {
+      $scope.sites = sorted;
+    });
+  });
+});
+
 //angular.bootstrap(document, ['pledgedSitesApp']);
 
 // Low-level data injection

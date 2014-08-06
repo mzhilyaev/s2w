@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="pledgedSitesApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Subscribe to Web: Mag Store</title>
+    </head>
+    <body ng-cloak>
+        <div class="container dash-container" ng-controller="magstoreCtrl">
+          <p>Mag Store!
+          </p>
+          <div class="sitesDiv">
+            <table class="">
+             <tr ng-repeat="item in sites">
+               <td class="dashTd">
+                <a href="http://{{item[0]}}">{{item[0]}}</a>
+               </td>
+               <td class="dashTd">
+                {{item[1]}} visits
+               </td>
+               <td class="controlTd">
+                 <span ng_show="item[2].canPledge && !item[2].pledged">
+                   <button class="" ng-click="passon('pledged', item[0])">Pledge</button>
+                 </span>
+                 <span ng_show="item[2].canPledge && item[2].pledged">
+                   Already Pledged,
+                   <span ng_show="!item[2].unblocked">
+                     Adds are hidden
+                   </span>
+                   <span ng_show="item[2].unblocked">
+                     Adds are shown
+                   </span>
+                   <span ng_show="item[2].unpledged">
+                     Pledge wull be revoked 1st of the month
+                   </span>
+                 </span>
+               </td>
+               <td class="dashTd">
+                  <button class="" ng-click="configure(item[0])">Settings</button>
+               </td>
+             </tr>
+            </table>
+          </div>
+        </div>
+    </body>
+</html>
