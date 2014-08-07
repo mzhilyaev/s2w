@@ -47,8 +47,16 @@ pledgedSitesApp.controller("pledgedSitesCtrl", function($scope) {
 pledgedSitesApp.controller("pledgedSitesCtrlDebug", function($scope) {
   $scope.pledgedSites = null;
 
+  $scope.showData = function showData() {
+    self.port.emit("submissionData");
+  }
 
-  $scope.addParticipatingSite = function monthlyPledge() {
+  $scope.hideData = function hideData() {
+    $scope.submissionData = null;
+  }
+
+  $scope.sendData = function sendData() {
+    self.port.emit("send");
   }
 
   $scope.addSite = function() {
@@ -72,6 +80,12 @@ pledgedSitesApp.controller("pledgedSitesCtrlDebug", function($scope) {
       $scope.pledgedSites = pledgeData.sites;
       $scope.pledgedSitesKeys = Object.keys(pledgeData.sites).reverse();
       $scope.monthlyPledgeAmount = pledgeData.amount;
+    });
+  });
+
+  self.port.on("submissionData", function(data) {
+    $scope.$apply(_ => {
+      $scope.submissionData = JSON.stringify(data, null, 1);
     });
   });
 });

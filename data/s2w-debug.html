@@ -9,6 +9,12 @@
           <div ng-show="pledgedSites">
           <div>
              <button class="btn btn-default" ng-click="clearAll()">Clear All Sites</button>
+             <button class="btn btn-default" ng-click="sendData()">Submit Data</button>
+             <button class="btn btn-default" ng-show="!submissionData" ng-click="showData()">Show Submission</button>
+             <button class="btn btn-default" ng-show="submissionData" ng-click="hideData()">Hide Submission</button>
+          </div>
+          <div ng-show="submissionData">
+           <pre>{{submissionData}}</pre>
           </div>
             <form>
               Enter participating site
