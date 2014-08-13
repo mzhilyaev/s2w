@@ -6,21 +6,8 @@
     </head>
     <body ng-cloak>
         <div class="container" ng-controller="pledgePanelCtr">
-          <div class="pledge-intro" ng-show="introPledge">
-            <p> {{siteInfo.host}} supports Mozilla pledge. </p>
-            <p> Do you want to pay this site and remove ads in return? </p>
-            <div>
-              <button class="btn btn-default" ng-click="passon('pledged')">Yes Pledge!</button>
-            </div>
-            <div>
-              <button class="btn btn-default" ng-click="passon('pledge-later')">May be later</button>
-            </div>
-            <div>
-              <button class="btn btn-default" ng-click="passon('pledge-never')">Never for that site</button>
-            </div>
-          </div>
           <div class="pledge-intro" ng-show="pledgedSiteDialog">
-            You pledged {{siteInfo.host}}.  You can:
+            {{siteInfo.host}} is Ad free:
             <div ng-show="!siteInfo.unblocked">
               <button class="btn btn-default" ng-click="passon('unblock')">Show Ads</button>
             </div>
@@ -29,13 +16,7 @@
             </div>
             <div ng-show="!siteInfo.unpledged">
               <button class="btn btn-default" ng-click="passon('unpledge')">Revoke your pledge</button>
-              to {{siteInfo.host}}. Will come in effect 1st of Next Month.
-            </div>
-            <div ng-show="siteInfo.unpledged">
-              Your pledge to {{siteInfo.host}} will be revoked 1st of Next Month.
-              <br/>
-              Would you like to
-              <button class="btn btn-default" ng-click="passon('repledge')">Stop the revokation</button>
+              to {{siteInfo.host}}.
             </div>
           </div>
           <div class="pledge-intro" ng-show="nominateSiteDialog">

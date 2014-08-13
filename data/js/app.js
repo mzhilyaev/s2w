@@ -98,12 +98,9 @@ pledgedSitesApp.controller("pledgePanelCtr", function($scope) {
   self.port.on("siteInfo", function(siteData) {
     $scope.$apply(_ => {
       $scope.siteInfo = siteData;
-      $scope.pledgedSiteDialog = siteData.pledged;
+      $scope.pledgedSiteDialog = siteData.canPledge;
       $scope.nominateSiteDialog = (!siteData.canPledge && !siteData.nominated);
-      $scope.introPledge = (siteData.canPledge && !siteData.pledged && !siteData.canceledForEver);
-      if ($scope.introPledge) {
-        self.port.emit("command", {token: "offered", site: siteData.host});
-      }
+      self.port.emit("command", {token: "offered", site: siteData.host});
     });
   });
 });
