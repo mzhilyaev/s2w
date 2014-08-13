@@ -31,29 +31,22 @@
                    <a href="http://{{site}}">{{site}}</a>
                  </td>
                  <td>
-                   <span ng-show="pledgedSites[site].canPledge"> supports s2w</span>
-                   <span ng-show="!pledgedSites[site].canPledge"> does not support s2w</span>
+                   <span ng-show="pledgedSites[site].canPledge"> Add free</span>
                  </td>
                  <td>
-                   <span ng-show="pledgedSites[site].pledged"> already pledged </span>
-                   <span ng-show="!pledgedSites[site].pledged"> never pledged </span>
+                   panel shown {{pledgedSites[site].panelShown}}
                  </td>
                  <td>
-                   offered {{pledgedSites[site].offered}} times
+                   ads blocked {{pledgedSites[site].blockedAdsCount}}
+                 <td>
+                   <span ng-show="pledgedSites[site].unblocked"> Ads shown</span>
+                   <span ng-show="!pledgedSites[site].unblocked"> Ads blocked </span>
                  </td>
                  <td>
-                   pledge later {{pledgedSites[site].pledgeLater}}
+                   <span ng-show="pledgedSites[site].unpledged"> Revoked </span>
                  </td>
                  <td>
-                   <span ng-show="pledgedSites[site].cancelledForever"> cancelled </span>
-                 </td>
-                 <td>
-                   <span ng-show="pledgedSites[site].unblocked"> unblocked on</span>
-                   <span ng-show="!pledgedSites[site].unblocked"> unblocked off </span>
-                 </td>
-                 <td>
-                   <span ng-show="pledgedSites[site].unpledged"> unpledged on </span>
-                   <span ng-show="!pledgedSites[site].unpledged"> unpledged off </span>
+                   <span ng-show="pledgedSites[site].nominated"> Nominated </span>
                  </td>
                  <td>
                    <button class="" ng-click="clearSite(site)">Clear</button>
@@ -61,11 +54,6 @@
                  <td>
                    <button class="" ng-click="deleteSite(site)">Delete</button>
                  </td>
-                 <!--
-                 <td>
-                   <button class="btn btn-default" ng-click="clear(site)">Clear All</button>
-                 </td>
-                 -->
                </tr>
             </table>
           </div>
