@@ -108,17 +108,6 @@ pledgedSitesApp.controller("pledgePanelCtr", function($scope) {
 pledgedSitesApp.controller("dashboardCtrl", function($scope) {
   $scope.showChart = true;
 
-  $scope.toggelChart = function() {
-    if ($scope.showChart) {
-      $scope.showChart = false;
-      $("#chartButton").text("Show");
-    }
-    else {
-      $scope.showChart = true;
-      $("#chartButton").text("Hide");
-    }
-  }
-
   $scope.passon = function(token, site) {
     self.port.emit("command", {token: token, site: site});
   }
@@ -140,7 +129,7 @@ pledgedSitesApp.controller("dashboardCtrl", function($scope) {
       return domains[b] - domains[a];
     }).forEach(domain => {
       // only collect sites that are pledged
-      if (pledges.sites[domain] && pledges.sites[domain].pledged) {
+      if (pledges.sites[domain] && pledges.sites[domain].canPledge) {
         sorted.push([domain, domains[domain], pledges.sites[domain]]);
         visited[domain] = true;
         topSites.push([domain, domains[domain]]);
@@ -149,7 +138,7 @@ pledgedSitesApp.controller("dashboardCtrl", function($scope) {
 
     // add participating sites that were not visited
     Object.keys(pledges.sites).forEach(domain => {
-      if (!visited[domain] && pledges.sites[domain].pledged) {
+      if (!visited[domain] && pledges.sites[domain].canPledge) {
         sorted.push([domain, 0, pledges.sites[domain]]);
       }
       // add nominated sites
@@ -163,34 +152,6 @@ pledgedSitesApp.controller("dashboardCtrl", function($scope) {
       $scope.sites = sorted;
       $scope.nominated = nominated;
     });
-    /* @TODO - the graph needs to change to bars and refelct pledged % of visisted sites
-    $("#visitChart").empty();
-    // draw a pie chart
-    let catsPie = $.jqplot("visitChart", [topSites.slice(0,12)], {
-      grid: {
-        background: "transparent",
-        drawBorder: false,
-        shadow: false,
-      },
-      legend: {
-        placement: "outsideGrid",
-        show: true,
-      },
-      //seriesColors: seriesColors,
-      seriesDefaults: {
-        renderer: $.jqplot.PieRenderer,
-        rendererOptions: {
-          dataLabelPositionFactor: .6,
-          dataLabelThreshold: 4,
-          highlightMouseOver: false,
-          showDataLabels: true,
-          sliceMargin: 2,
-          startAngle: -90,
-        },
-        shadow: false,
-      },
-    });
-    */
   });
 });
 

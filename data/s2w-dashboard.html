@@ -9,7 +9,6 @@
           <p>Welcome to Subscribe to Web dashboard!
             <button ng-click="passon('uninstall')">Uninstall</button>
           </p>
-          <div class="visitChart" id="visitChart" ng-show="showChart"></div>
           <div class="sitesDiv">
             <table class="">
              <tr ng-repeat="item in sites">
@@ -19,17 +18,11 @@
                <td class="dashTd">
                 {{item[1]}} visits
                </td>
+               <td class="dashTd">
+                Ads blocked {{item[2].blockedAdsCount}}
+               </td>
                <td class="controlTd">
-                 <span ng_show="item[2] == null">
-                   <button class="" ng-click="passon('nominate', item[0])">Nominate</button>
-                 </span>
-                 <span ng_show="!item[2].canPledge && item[2].nominated">
-                  Nominated
-                 </span>
-                 <span ng_show="item[2].canPledge && !item[2].pledged">
-                   <button class="" ng-click="passon('pledged', item[0])">Pledge</button>
-                 </span>
-                 <span ng_show="item[2].canPledge && item[2].pledged">
+                 <span ng_show="item[2].canPledge && !item[2].unpledged">
                    <span ng_show="!item[2].unblocked">
                      <button class="" ng-click="passon('unblock', item[0])">Show Ads</button>
                    </span>
@@ -37,13 +30,11 @@
                      <button class="" ng-click="passon('reblock', item[0])">Block Ads</button>
                    </span>
                    <span ng_show="!item[2].unpledged">
-                     <button class="" ng-click="passon('unpledge', item[0])">Revoke Pledge</button>
-                     affective 1st of Next Month
-                   </span>
-                   <span ng_show="item[2].unpledged">
-                     <button class="" ng-click="passon('repledge', item[0])">Remove Pledge Revokation</button>
+                     <button class="" ng-click="passon('unpledge', item[0])">Revoke</button>
                    </span>
                  </span>
+                 <span ng_show="item[2].unpledged">
+                  REVOKED - Ads are always shown
                  </span>
                </td>
              </tr>
