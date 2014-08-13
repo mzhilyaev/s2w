@@ -75,6 +75,10 @@ pledgedSitesApp.controller("pledgedSitesCtrlDebug", function($scope) {
     self.port.emit("clearall", $scope.newsite);
   }
 
+  $scope.reassign = function() {
+    self.port.emit("reassign", $scope.newsite);
+  }
+
   self.port.on("pledgedSites", function(pledgeData) {
     $scope.$apply(_ => {
       $scope.pledgedSites = pledgeData.sites;
