@@ -110,7 +110,6 @@ pledgedSitesApp.controller("pledgePanelCtr", function($scope) {
 });
 
 pledgedSitesApp.controller("dashboardCtrl", function($scope) {
-  $scope.showChart = true;
 
   $scope.passon = function(token, site) {
     self.port.emit("command", {token: token, site: site});
