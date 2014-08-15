@@ -1,0 +1,56 @@
+<!doctype html>
+<html ng-app="pledgedSitesApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Subscribe to Web: Dashboard</title>
+    </head>
+    <body ng-cloak>
+        <div class="container landing-container" ng-controller="landingCtrl">
+          <p>Welcome to Subscribe to Web Landing Page!
+          </p>
+          <div>
+            <div>
+              You visited {{visits}} pages from participating site for the past month
+            </div>
+            <div>
+              So far these sites blocked away {{blocked}} ad banners on your behalf
+            </div>
+            <div>
+              You nominated {{nominated}} sites
+            </div>
+          </div>
+          <div style="margin-top: 30px;">
+            <p>
+              Most popular participating Sites
+            </p>
+            <table class="" border>
+             <tr>
+              <td>Domain</td>
+              <td>Monthly Visits</td>
+              <td>Blocked Ads</td>
+             </tr>
+             <tr ng-repeat="item in topSites">
+               <td class="dashTd">
+                <a href="http://{{item[0]}}">{{item[0]}}</a>
+               </td>
+               <td class="dashTd">
+                {{item[1]}}
+               </td>
+               <td class="dashTd">
+                {{item[2]}}
+               </td>
+             </tr>
+            </table>
+           </div>
+           <div style="margin-top: 20px;">
+              <div>
+                <a href ng-click="passon('dash-board')">S2W Dash Board</a>
+              </div>
+              <spacer></spacer>
+              <div>
+                <a href ng-click="passon('mag-store')">Mag Store</a>
+              </div>
+           </div>
+        </div>
+    </body>
+</html>

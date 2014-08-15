@@ -158,6 +158,48 @@ pledgedSitesApp.controller("dashboardCtrl", function($scope) {
   });
 });
 
+pledgedSitesApp.controller("landingCtrl", function($scope) {
+
+  $scope.passon = function(token, site) {
+    self.port.emit("command", {token: token, site: site});
+  }
+
+  self.port.on("data", function(data) {
+    let {usage, pledges} = data;
+    let domains = usage.domains;
+    let topSites = [];
+    let totalVisits = 0;
+    let totalAdsBlocked = 0;
+    let totalNominated = 0;
+
+    // populate sorted with visited participating sites first
+    Object.keys(domains).sort(function(a, b) {
+      return domains[b] - domains[a];
+    }).forEach(domain => {
+      // only collect sites that are pledged
+      if (pledges.sites[domain] && pledges.sites[domain].canPledge) {
+        topSites.push([domain, domains[domain], pledges.sites[domain].blockedAdsCount]);
+        totalVisits += domains[domain];
+        totalAdsBlocked += pledges.sites[domain].blockedAdsCount;
+      }
+    });
+
+    Object.keys(pledges.sites).forEach(domain => {
+      if (pledges.sites[domain].nominated) {
+        totalNominated++;
+      }
+    });
+
+    $scope.$apply(_ => {
+      $scope.usage = usage;
+      $scope.topSites = topSites.slice(0,9);
+      $scope.visits = totalVisits;
+      $scope.blocked = totalAdsBlocked;
+      $scope.nominated = totalNominated;
+    });
+
+  });
+});
 
 pledgedSitesApp.controller("magstoreCtrl", function($scope) {
 
