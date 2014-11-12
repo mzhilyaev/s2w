@@ -3,30 +3,56 @@
     <head>
         <meta charset="utf-8">
         <title>Pledge Panel</title>
+        <style>
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.pledge-intro {
+  padding-top: 188px;
+  background-repeat: no-repeat;
+}
+
+.pledge-intro[canPledge=false] {
+  background-image: url("images/banner_cantPledge.png");
+}
+
+.pledge-intro[canPledge=true] {
+  background-image: url("images/banner_canPledge.png");
+}
+
+.button {
+  border-top: 1px solid #ccc;
+  font-family: Open Sans;
+  font-size: 14px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+}
+
+.button:first-child {
+  border-top: 0;
+}
+
+.button:hover {
+  background-color: #ff9500;
+  color: #fff;
+}
+
+[canPledge=false] #nominate:not(:hover) {
+  color: #ff9500;
+}
+        </style>
     </head>
     <body ng-cloak>
         <div class="container" ng-controller="pledgePanelCtr">
-          <div class="pledge-intro" ng-show="pledgedSiteDialog">
-            {{siteInfo.host}} is Ad free:
-            <div ng-show="!siteInfo.unblocked">
-              <button class="btn btn-default" ng-click="passon('unblock')">Show Ads</button>
-            </div>
-            <div ng-show="siteInfo.unblocked">
-              <button class="btn btn-default" ng-click="passon('reblock')">Block Ads</button>
-            </div>
-            <div ng-show="!siteInfo.unpledged">
-              <button class="btn btn-default" ng-click="passon('unpledge')">Revoke your pledge</button>
-              to {{siteInfo.host}}.
-            </div>
-          </div>
-          <div class="pledge-intro" ng-show="nominateSiteDialog">
-            {{siteInfo.host}} does not support Mozilla Pledge, but you can
-            <button class="btn btn-default" ng-click="passon('nominate')">Nominate this Site</button>
-            and Mozilla will contact {{siteInfo.host}} on your behalf.
-          </div>
-          <spacer></spacer>
-          <div>
-            <a href ng-click="passon('landing')">LANDING PAGE</a>
+          <div class="pledge-intro" canPledge="{{siteInfo.canPledge}}">
+            <div class="button" ng-click="passon('dash-board')">Your Dashboard</div>
+            <div class="button">Discover More Ad-Free Sites</div>
+            <div class="button" id="nominate">Nominate a Site</div>
+            <div class="button">About</div>
+            <div class="button">Log Out</div>
           </div>
         </div>
     </body>
