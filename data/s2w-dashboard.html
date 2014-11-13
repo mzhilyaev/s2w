@@ -3,58 +3,295 @@
     <head>
         <meta charset="utf-8">
         <title>Subscribe to Web: Dashboard</title>
+        <style>
+#categories,
+#diamond-grid {
+  font-family: Open Sans;
+  width: 1380px;
+}
+
+.option {
+  color: #fff;
+  display: inline-block;
+  height: 100px;
+  margin: 30px;
+  transform: rotate(45deg);
+  width: 100px;
+}
+
+.option:hover {
+  box-shadow: 5px 5px 10px #333;
+  cursor: pointer;
+}
+
+.option .unrotate {
+  height: 80px;
+  left: 18px;
+  position: absolute;
+  text-align: center;
+  top: 18px;
+  transform: rotate(-45deg);
+  width: 80px;
+}
+
+.option:nth-child(18n+9) {
+  margin-left: 110px;
+}
+
+.option:nth-child(n+9) {
+  margin-top: -50px;
+}
+
+.diamond {
+  background: #ccc;
+  display: inline-block;
+  height: 350px;
+  margin: 100px;
+  overflow: hidden;
+  transform: rotate(45deg);
+  width: 350px;
+}
+
+.diamond .unrotate {
+  text-align: center;
+  transform: rotate(-45deg);
+}
+
+.diamond:nth-child(4n+3) {
+  margin-left: 375px;
+}
+
+.diamond:nth-child(n+3) {
+  margin-top: -180px;
+}
+
+.new {
+  background: blue;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+}
+
+.new .unrotate {
+  color: #fff;
+  font-size: 10px;
+  left: 3px;
+  position: absolute;
+  top: 7px;
+}
+
+.category {
+  border-bottom: 1px solid #333;
+  font-size: 12px;
+  left: -25px;
+  padding-bottom: 1em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 50px;
+  width: 200px;
+}
+
+.title {
+  color: #333;
+  font-size: 40px;
+  font-weight: normal;
+  height: 50px;
+  line-height: 50px;
+  left: -60px;
+  position: absolute;
+  top: 90px;
+  width: 400px;
+  overflow: hidden;
+}
+
+.description {
+  color: #333;
+  font-size: 14px;
+  font-weight: normal;
+  height: 80px;
+  left: 25px;
+  line-height: 20px;
+  position: absolute;
+  top: 150px;
+  width: 350px;
+  overflow: hidden;
+}
+
+.footer {
+  height: 200px;
+  left: 143px;
+  position: absolute;
+  top: 205px;
+  width: 325px;
+}
+
+.bgpurple {
+  background-color: purple;
+}
+.colpurple {
+  color: purple;
+}
+.bgblack {
+  background-color: black;
+}
+.colblack {
+  color: black;
+}
+.bgred {
+  background-color: red;
+}
+.colred {
+  color: red;
+}
+.bgblue {
+  background-color: blue;
+}
+.colblue {
+  color: blue;
+}
+.bggreen {
+  background-color: green;
+}
+.colgreen {
+  color: green;
+}
+.bgdarkolivegreen {
+  background-color: darkolivegreen;
+}
+.coldarkolivegreen {
+  color: darkolivegreen;
+}
+.bgbrown {
+  background-color: brown;
+}
+.colbrown {
+  color: brown;
+}
+.bgfirebrick {
+  background-color: firebrick;
+}
+.colfirebrick {
+  color: firebrick;
+}
+.bgmediumvioletred {
+  background-color: mediumvioletred;
+}
+.colmediumvioletred {
+  color: mediumvioletred;
+}
+.bgnavy {
+  background-color: navy;
+}
+.colnavy {
+  color: navy;
+}
+.bgteal {
+  background-color: teal;
+}
+.colteal {
+  color: teal;
+}
+.bgtomato {
+  background-color: tomato;
+}
+.coltomato {
+  color: tomato;
+}
+.bgsienna {
+  background-color: sienna;
+}
+.colsienna {
+  color: sienna;
+}
+.bgseagreen {
+  background-color: seagreen;
+}
+.colseagreen {
+  color: seagreen;
+}
+.bgmidnightblue {
+  background-color: midnightblue;
+}
+.colmidnightblue {
+  color: midnightblue;
+}
+.bgindianred {
+  background-color: indianred;
+}
+.colindianred {
+  color: indianred;
+}
+.bgdarkred {
+  background-color: darkred;
+}
+.coldarkred {
+  color: darkred;
+}
+.bgdarkorange {
+  background-color: darkorange;
+}
+.coldarkorange {
+  color: darkorange;
+}
+.bgdarkgreen {
+  background-color: darkgreen;
+}
+.coldarkgreen {
+  color: darkgreen;
+}
+.bgdarkgoldenrod {
+  background-color: darkgoldenrod;
+}
+.coldarkgoldenrod {
+  color: darkgoldenrod;
+}
+.bgdarkcyan {
+  background-color: darkcyan;
+}
+.coldarkcyan {
+  color: darkcyan;
+}
+.bgroyalblue {
+  background-color: royalblue;
+}
+.colroyalblue {
+  color: royalblue;
+}
+.bgdarkorchid {
+  background-color: darkorchid;
+}
+.coldarkorchid {
+  color: darkorchid;
+}
+.bgdarkslategray {
+  background-color: darkslategray;
+}
+.coldarkslategray {
+  color: darkslategray;
+}
+        </style>
     </head>
     <body ng-cloak>
-        <div class="container dash-container" ng-controller="dashboardCtrl">
-          <p>Welcome to Subscribe to Web dashboard!
-            <button ng-click="passon('uninstall')">Uninstall</button>
-          </p>
-          <div class="sitesDiv">
-            <table class="">
-             <tr ng-repeat="item in sites">
-               <td class="dashTd">
-                <a id="{{'anchor_' + item[0]}}"></a><a href="http://{{item[0]}}">{{item[0]}}</a>
-               </td>
-               <td class="dashTd">
-                {{item[1]}} visits
-               </td>
-               <td class="dashTd">
-                Ads blocked {{item[2].blockedAdsCount}}
-               </td>
-               <td class="controlTd">
-                 <span ng_show="item[2].canPledge && !item[2].unpledged">
-                   <span ng_show="!item[2].unblocked">
-                     <button class="" ng-click="passon('unblock', item[0])">Show Ads</button>
-                   </span>
-                   <span ng_show="item[2].unblocked">
-                     <button class="" ng-click="passon('reblock', item[0])">Block Ads</button>
-                   </span>
-                   <span ng_show="!item[2].unpledged">
-                     <button class="" ng-click="passon('unpledge', item[0])">Revoke</button>
-                   </span>
-                 </span>
-                 <span ng_show="item[2].unpledged">
-                  REVOKED - Ads are always shown
-                 </span>
-               </td>
-             </tr>
-            </table>
+      <div class="dash-container" ng-controller="dashboardCtrl">
+
+        <div id="categories">
+          <div class="option bg{{item.color}}" ng-click="passon(item.cat)" ng-repeat="item in categories">
+            <div class="unrotate">{{item.cat}}</div>
           </div>
-          <div class="nominatedDiv">
-            <a href ng-show="nominated.length > 0" ng-click="toggleNominatedList()">Nominated Sites</a>
-            <div ng-show="showNominated">
-              <table class="">
-               <tr ng-repeat="item in nominated">
-                 <td class="dashTd">
-                  <a href="http://{{item[0]}}">{{item[0]}}</a>
-                 </td>
-                 <td class="dashTd">
-                  {{item[1]}} visits
-                 </td>
-               </tr>
-              </table>
-            </div>
-           </div>
         </div>
+
+        <div id="diamond-grid">
+          <div class="diamond" ng-repeat="item in sites">
+            <div class="new bg{{item.color}}" ng-show="item.new">
+              <div class="unrotate">NEW</div>
+            </div>
+            <h2 class="category unrotate col{{item.color}}">{{item.category}}</h2>
+            <h1 class="title unrotate">{{item.title}}</h1>
+            <p class="description unrotate">{{item.description}}</p>
+            <div class="footer unrotate bg{{item.color}}"></div>
+          </div>
+        </div>
+
+      </div>
     </body>
 </html>
