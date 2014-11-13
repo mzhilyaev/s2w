@@ -5,30 +5,57 @@
         <title>Pledge Panel</title>
         <style>
 body {
+  cursor: default;
+  font-family: Open Sans;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
-.pledge-intro {
-  padding-top: 188px;
+.pledge-intro .banner {
   background-repeat: no-repeat;
+  color: #fff;
+  font-size: 18px;
+  height: 188px;
+  padding: 0 1em;
 }
 
-.pledge-intro[canPledge=false] {
+.pledge-intro[canPledge=false] .banner {
   background-image: url("images/banner_cantPledge.png");
 }
 
-.pledge-intro[canPledge=true] {
+.pledge-intro[canPledge=false] .banner .banner-text {
+  padding-top: 40px;
+}
+
+.pledge-intro[canPledge=false] .banner .button {
+  background-color: #fff;
+  border: 0;
+  border-radius: 4px;
+  color: #ff9500;
+  font-weight: bold;
+  margin: 2em auto;
+  width: 160px;
+}
+
+.pledge-intro[canPledge=false] .banner:hover .button {
+  background-color: #ff9500;
+  color: #fff;
+}
+
+.pledge-intro[canPledge=true] .banner {
   background-image: url("images/banner_canPledge.png");
+}
+
+.pledge-intro[canPledge=true] .banner .banner-text {
+  padding-top: 105px;
 }
 
 .button {
   border-top: 1px solid #ccc;
-  font-family: Open Sans;
   font-size: 14px;
   height: 45px;
   line-height: 45px;
-  text-align: center;
 }
 
 .button:first-child {
@@ -48,6 +75,13 @@ body {
     <body ng-cloak>
         <div class="container" ng-controller="pledgePanelCtr">
           <div class="pledge-intro" canPledge="{{siteInfo.canPledge}}">
+            <div class="banner" ng-show="siteInfo.canPledge">
+              <div class="banner-text">Experience Ad-Free Browsing on the Web Sites You Love</div>
+            </div>
+            <div class="banner" ng-show="!siteInfo.canPledge">
+              <div class="banner-text">This web site is not part of the Ad-Free Web.</div>
+              <div class="button">NOMINATE THEM</div>
+            </div>
             <div class="button" ng-click="passon('dash-board')">Your Dashboard</div>
             <div class="button">Discover More Ad-Free Sites</div>
             <div class="button" id="nominate">Nominate a Site</div>
